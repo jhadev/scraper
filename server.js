@@ -30,17 +30,17 @@ db.on("error", function (error) {
   console.log("Database Error:", error);
 });
 
-// Main route (simple Hello World Message)
-app.get("/", function (req, res) {
+
+app.get("/", (req, res) => {
   axios.get("https://www.nypost.com").then(function (response) {
 
 
-    var $ = cheerio.load(response.data);
+    const $ = cheerio.load(response.data);
 
-    $(".home-page-section-stories-wrapper").each(function (i, element) {
+    $(".home-page-section-stories-wrapper").each((i, element) => {
 
-      var title = $(element).find("h3.headline").text();
-      var link = $(element).find("a").attr("href");
+      const title = $(element).find("h3.headline").text();
+      const link = $(element).find("a").attr("href");
 
       // Save these results in an object that we'll push into the results array we defined earlier
       if (title && link) {
@@ -51,7 +51,7 @@ app.get("/", function (req, res) {
         };
         // Insert the data in the scrapedData db
         db.scrapedData.insert(scrapeObject,
-          function (err, inserted) {
+          (err, inserted) => {
             if (err) {
               // Log the error if one is encountered during the query
               console.log(err);
@@ -66,9 +66,9 @@ app.get("/", function (req, res) {
   res.render('index');
 });
 
-app.get("/api/all", function (req, res) {
+app.get("/api/all", (req, res) => {
   // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function (error, found) {
+  db.scrapedData.find({}, (error, found) => {
     // Throw any errors to the console
     if (error) {
       console.log(error);
@@ -80,6 +80,6 @@ app.get("/api/all", function (req, res) {
   });
 });
 
-app.listen(3000, function () {
+app.listen(3000,() => {
   console.log("App running on port 3000!");
 });

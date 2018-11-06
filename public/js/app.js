@@ -1,18 +1,18 @@
-function displayResults(articles) {
+const displayResults = (articles) => {
   $("tbody").empty();
 
-  articles.forEach(function(article) {
+  articles.forEach((article) => {
     let tr = $("<tr>").append(
       $("<td>").text(article.title),
-      $("<td>").text(article.link),
+      $("<td>").html(article.link)
     );
 
     $("tbody").append(tr);
   });
 }
 
-$("#scrape").on("click", function() {
-  $.getJSON("/api/all", function(data) {
+$("#scrape").on("click",() => {
+  $.getJSON("/api/all",(data) => {
     displayResults(data);
     console.log("hello")
   });
