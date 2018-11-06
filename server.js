@@ -17,6 +17,9 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static("public"));
 // Database configuration
 var databaseUrl = "scraper";
 var collections = ["scrapedData"];

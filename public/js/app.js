@@ -3,7 +3,7 @@ function displayResults(articles) {
 
   articles.forEach(function(article) {
     let tr = $("<tr>").append(
-      $("<td>").text(artcle.title),
+      $("<td>").text(article.title),
       $("<td>").text(article.link),
     );
 
